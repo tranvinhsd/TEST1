@@ -1,8 +1,9 @@
+
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main", "master"] # Chạy khi có code mới đẩy lên nhánh main hoặc master
+    branches: ["main", "master"]
   workflow_dispatch:
 
 permissions:
@@ -17,25 +18,38 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
+      # 1. Lấy mã nguồn
       - name: Checkout
         uses: actions/checkout@v4
-      
-- name: Setup Node.js
-  uses: actions/setup-node@v4
-  with:
-    node-version: 22
-    cache: npm
 
-- name: Install dependencies
-  run: npm install
+      # 2. Cài đặt Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
 
-- name: Build project
-  run: npm run build
-        env:
-          # Dòng này sẽ lấy API Key từ Bước 1 bạn đã cài để đưa vào web
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          
+      # 3. Cài đặt thư viện
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build ứng dụng
+      - name: Build project
+        run: npm run build
+
+      # 5. Kiểm tra kết quả build
+      - name: Verify build
+        run: |
+          if [ ! -d "./dist" ]; then
+            echo "ERROR: Khong tim thay thu muc dist"
+            exit 1
+          fi
+          echo "Build thanh cong!"
+          ls -la ./dist
+
+      # 6. Đóng gói sản phẩm
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -45,9 +59,12 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
     needs: build
+
     steps:
+      # 7. Triển khai lên GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
