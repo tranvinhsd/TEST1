@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v4
         with:
           node-version: "22"
           package-manager-cache: false
@@ -37,9 +37,9 @@ jobs:
 
       - name: Verify build
         run: |
-          test -d ./dist || (echo "ERROR: Missing dist folder" && exit 1)
+          test -d dist || exit 1
           echo "Build successful!"
-          ls -la ./dist
+          ls -la dist
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
