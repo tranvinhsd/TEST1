@@ -632,7 +632,7 @@ export function ActiveQuiz({
                       >
                         {OPTION_LETTERS[idx]}
                       </span>
-                      <span className="text-[clamp(1.5rem,2.5vw,3.2rem)] font-semibold leading-snug break-words">
+                      <span className="text-[clamp(1.5rem,2.5vw,3.0rem)] font-semibold leading-snug break-words">
                         {optionText}
                       </span>
                     </div>
