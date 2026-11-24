@@ -430,8 +430,8 @@ export function ActiveQuiz({
       {/* Top Full-Width Header & Progress Bar (High Legibility at 7m on 55" TV) */}
       <header className="w-full space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <span className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tabular-nums">
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-3">
+            <span className="font-display text-2xl sm:text-3xl lg:text-3xl font-bold text-slate-900 tabular-nums">
               Câu {String(currentIndex + 1).padStart(2, '0')} / {String(questions.length).padStart(2, '0')}
             </span>
             <span className="text-base sm:text-xl lg:text-2xl font-medium text-slate-600">
@@ -443,7 +443,7 @@ export function ActiveQuiz({
             {/* Giant TV-readable countdown timer */}
             <div className="flex items-center gap-3 sm:gap-4 bg-white border border-slate-200 rounded-xl px-4 sm:px-6 py-2 sm:py-2.5">
               <span
-                className={`inline-flex items-center gap-2 text-base sm:text-xl lg:text-2xl font-semibold whitespace-nowrap ${
+                className={`inline-flex items-center gap-2 text-base sm:text-2xl lg:text-3xl font-semibold whitespace-nowrap ${
                   isCritical
                     ? 'text-rose-700'
                     : isWarning
@@ -458,7 +458,7 @@ export function ActiveQuiz({
               </span>
 
               <span
-                className={`font-mono text-3xl sm:text-5xl lg:text-6xl font-bold tabular-nums leading-none ${timerColorClass}`}
+                className={`font-mono text-3xl sm:text-4xl lg:text-4xl font-bold tabular-nums leading-none ${timerColorClass}`}
                 aria-live="polite"
               >
                 {String(secondsLeft).padStart(2, '0')}s
@@ -574,7 +574,7 @@ export function ActiveQuiz({
         ) : (
           <div className="w-full space-y-6 sm:space-y-8">
             <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 lg:p-12">
-              <h1 className="font-display text-[clamp(1.75rem,3.3vw,3.4rem)] font-bold text-slate-900 leading-[1.24] tracking-tight text-balance">
+              <h1 className="font-display text-[clamp(1.75rem,2.5vw,3.0rem)] font-bold text-blue-900 leading-[1.3] tracking-normal text-pretty">
                 {currentQuestion.prompt}
               </h1>
             </div>
@@ -632,7 +632,7 @@ export function ActiveQuiz({
                       >
                         {OPTION_LETTERS[idx]}
                       </span>
-                      <span className="text-[clamp(1.3rem,2.1vw,2.2rem)] font-semibold leading-snug break-words">
+                      <span className="text-[clamp(1.5rem,2.5vw,3.2rem)] font-semibold leading-snug break-words">
                         {optionText}
                       </span>
                     </div>
